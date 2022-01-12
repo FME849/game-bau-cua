@@ -71,15 +71,30 @@ const gameBauCuaReducer = (state = initialState, action) => {
             return { ...state }
 
         case 'XOC_DIA':
-            let mangXucXacIndex = [];
-            console.log(action.type)
+            let mangXucXac = [];
             for (let i = 0; i < 3; i++) {
-                mangXucXacIndex[i] = Math.floor(Math.random() * state.danhSachQuanCuoc.length);
+                mangXucXac[i] = state.danhSachQuanCuoc[Math.floor(Math.random() * 6)];
             }
-            const mangXucXac = mangXucXacIndex.map((indexItem) => {
-                return state.danhSachQuanCuoc[indexItem];
-            })
             state.mangXucXac = mangXucXac;
+            const datCuocArr = state.danhSachQuanCuoc.filter(quanCuoc => quanCuoc.diemDatCuoc !== 0); // lấy danh sách quân cược có diemDatCuoc != 0
+            const ketQuaArr = datCuocArr.map(quanCuoc => {
+                let diemHoanLai = 0;
+                let diemThangCuoc = 0;
+                state.mangXucXac.forEach(xucXac => {
+                    if (xucXac.ma === quanCuoc.ma) {
+                        // Nếu mã xúc xắc và mã quân cược trùng nhau lần đầu tiên
+                        if (diemHoanLai === 0) {
+                            diemHoanLai = quanCuoc.diemDatCuoc;
+                        }
+                        diemThangCuoc += quanCuoc.diemDatCuoc;
+                    }
+                })
+                return [diemHoanLai, diemThangCuoc];
+            });
+            let tongDiemThangCuoc = 0;
+            ketQuaArr.forEach(item => tongDiemThangCuoc += (item[0] + item[1])); // tính tổng điểm thắng cược = cách cộng tất cả các điểm lại
+            state.tienThuong += tongDiemThangCuoc;
+            state.danhSachQuanCuoc = initialState.danhSachQuanCuoc;  // reset các diemDatCuoc về 0   
             return { ...state }
 
         default:
