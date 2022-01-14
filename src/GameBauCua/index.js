@@ -9,7 +9,7 @@ export default function GameBauCua(props) {
         <div id='main'>
             <DiemCuoc />
 
-            <div className='mx-5 p-5'>
+            <div className='mx-5 px-5 py-3'>
                 <div className='row'>
                     <div className='col-7'>
                         <DanhSachCuoc />

@@ -45,7 +45,8 @@ const initialState = {
             ma: 'cua',
             hinhAnh: './img/cua.png',
         },
-    ]
+    ],
+    dangQuay: false,
 }
 
 const gameBauCuaReducer = (state = initialState, action) => {

@@ -1,12 +1,18 @@
 import React from 'react';
 import XucXac from './XucXac';
 import { useSelector, useDispatch } from 'react-redux';
+import { useSpring, animated } from 'react-spring';
 
 export default function DanhSachXucXac(props) {
 
     const mangXucXac = useSelector(state => state.gameBauCuaReducer.mangXucXac)
 
     const dispatch = useDispatch();
+
+    const quayXucXac = useSpring({
+        // to: { transform: rotate3d(1, 1, 1, '180deg') },
+        // from: { transform: rotate3d(1, 1, 1, '0deg') }
+    })
 
     return (
         <div className='py-3' >

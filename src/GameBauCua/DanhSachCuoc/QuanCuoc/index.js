@@ -5,7 +5,7 @@ export default function QuanCuoc(props) {
     const { ma, hinhAnh, diemDatCuoc } = props;
     const dispatch = useDispatch();
     return (
-        <div className='my-3'>
+        <div className='my-2'>
             <div className='container'>
                 <img src={hinhAnh} alt='' style={{ width: '100%' }} />
             </div>
